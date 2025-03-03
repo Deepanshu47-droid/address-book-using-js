@@ -55,19 +55,53 @@ class Contact {
         return `Name: ${this.firstName} ${this.lastName}, Address: ${this.address}, ${this.city}, ${this.state} - ${this.zip}, Phone: ${this.phoneNumber}, Email: ${this.email}`;
     }
 }
+// Address Book array to store contacts
+let addressBook = [];
 
+// Function to add contact to address book
+function addContact(contact) {
+    addressBook.push(contact);
+    console.log("Contact added successfully!");
+}
+
+
+
+// Example of adding contacts
 try {
     let contact1 = new Contact(
         "Deepanshu",
         "Malviya",
         "456 Colony",
         "Bhopal",
-        "MP",
+        "MPState",
         "462023",
         "9876543210",
         "deepanshu@example.com"
     );
-    console.log(contact1.display());
+    addContact(contact1);
+
+    let contact2 = new Contact(
+        "Shubham",
+        "Verma",
+        "123 Street",
+        "Indore",
+        "MPState",
+        "452001",
+        "9123456789",
+        "shubham@example.com"
+    );
+    addContact(contact2);
+
 } catch (error) {
     console.error(error.message);
 }
+
+// Display all contacts in address book
+function displayAddressBook() {
+    console.log("\n---- Address Book ----");
+    addressBook.forEach((contact, index) => {
+        console.log(`${index + 1}. ${contact.display()}`);
+    });
+}
+
+displayAddressBook();
