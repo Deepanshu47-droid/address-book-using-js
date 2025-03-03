@@ -105,6 +105,18 @@ class AddressBook {
             });
         }
     }
+    deleteContact(firstName, lastName) {
+        const index = this.contacts.findIndex(
+            contact => contact.firstName === firstName && contact.lastName === lastName
+        );
+        if (index !== -1) {
+            this.contacts.splice(index, 1);
+            console.log("Contact deleted successfully!");
+        } else {
+            console.log("Contact not found.");
+        }
+    }
+    
 }
 
 
@@ -149,3 +161,6 @@ myAddressBook.editContact("Shubham", "Verma", {
 
 console.log("\n---- After Update ----");
 myAddressBook.displayAddressBook();
+
+//UC - 5 : Delete Functionality
+myAddressBook.deleteContact("Shubham", "Verma");
