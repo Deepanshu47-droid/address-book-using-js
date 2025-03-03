@@ -60,10 +60,26 @@ class AddressBook {
         this.contacts = [];
     }
 
+    // addContact(contact) {
+    //     this.contacts.push(contact);
+    //     console.log("Contact added successfully!");
+    // }
+
     addContact(contact) {
-        this.contacts.push(contact);
-        console.log("Contact added successfully!");
+        // Duplicate check using filter on firstName and lastName
+        let duplicate = this.contacts.filter(existingContact => 
+            existingContact.firstName === contact.firstName &&
+            existingContact.lastName === contact.lastName
+        );
+        
+        if (duplicate.length > 0) {
+            console.log("Duplicate contact found. Cannot add the contact.");
+        } else {
+            this.contacts.push(contact);
+            console.log("Contact added successfully!");
+        }
     }
+    
 
     findContact(firstName, lastName) {
         return this.contacts.find(
@@ -116,6 +132,10 @@ class AddressBook {
             console.log("Contact not found.");
         }
     }
+    countContacts() {
+        console.log(`Total Contacts: ${this.contacts.length}`);
+        return this.contacts.length;
+    }
     
 }
 
@@ -164,3 +184,7 @@ myAddressBook.displayAddressBook();
 
 //UC - 5 : Delete Functionality
 myAddressBook.deleteContact("Shubham", "Verma");
+
+//UC - 6 : Count contacts
+myAddressBook.countContacts();
+
