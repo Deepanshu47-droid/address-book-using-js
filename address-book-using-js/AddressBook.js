@@ -188,6 +188,31 @@ viewPersonsByState() {
         console.log(`${state}: ${stateMap[state].join(", ")}`);
     }
     }
+    // Get count of contacts by city
+getCountByCity() {
+    let cityCount = this.contacts.reduce((countMap, contact) => {
+        countMap[contact.city] = (countMap[contact.city] || 0) + 1;
+        return countMap;
+    }, {});
+
+    console.log("\nCount of Persons by City:");
+    for (let city in cityCount) {
+        console.log(`${city}: ${cityCount[city]}`);
+    }
+}
+
+// Get count of contacts by state
+getCountByState() {
+    let stateCount = this.contacts.reduce((countMap, contact) => {
+        countMap[contact.state] = (countMap[contact.state] || 0) + 1;
+        return countMap;
+    }, {});
+
+    console.log("\nCount of Persons by State:");
+    for (let state in stateCount) {
+        console.log(`${state}: ${stateCount[state]}`);
+    }
+    }
 
 }
 
@@ -244,7 +269,10 @@ myAddressBook.countContacts();
 myAddressBook.searchByCity("Bhopal");
 myAddressBook.searchByState("MPState");
 
-//UC - 9 : view person by city
+//UC - 9 : view person by city or state
 myAddressBook.viewPersonsByCity();
 myAddressBook.viewPersonsByState();
 
+//UC - 10 : count by city or state
+myAddressBook.getCountByCity();
+myAddressBook.getCountByState();
