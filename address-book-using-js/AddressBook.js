@@ -136,7 +136,59 @@ class AddressBook {
         console.log(`Total Contacts: ${this.contacts.length}`);
         return this.contacts.length;
     }
+    // Search contacts by city
+searchByCity(city) {
+    let personsInCity = this.contacts.filter(contact => contact.city === city);
+    if (personsInCity.length > 0) {
+        console.log(`\nContacts in ${city}:`);
+        personsInCity.forEach(contact => console.log(contact.display()));
+    } else {
+        console.log(`\nNo contacts found in ${city}.`);
+    }
+}
+
+// Search contacts by state
+searchByState(state) {
+    let personsInState = this.contacts.filter(contact => contact.state === state);
+    if (personsInState.length > 0) {
+        console.log(`\nContacts in ${state}:`);
+        personsInState.forEach(contact => console.log(contact.display()));
+    } else {
+        console.log(`\nNo contacts found in ${state}.`);
+    }
+    }
+    // View persons grouped by city
+viewPersonsByCity() {
+    let cityMap = this.contacts.reduce((map, contact) => {
+        if (!map[contact.city]) {
+            map[contact.city] = [];
+        }
+        map[contact.city].push(`${contact.firstName} ${contact.lastName}`);
+        return map;
+    }, {});
+
+    console.log("\nPersons by City:");
+    for (let city in cityMap) {
+        console.log(`${city}: ${cityMap[city].join(", ")}`);
+    }
+}
+
+// View persons grouped by state
+viewPersonsByState() {
+    let stateMap = this.contacts.reduce((map, contact) => {
+        if (!map[contact.state]) {
+            map[contact.state] = [];
+        }
+        map[contact.state].push(`${contact.firstName} ${contact.lastName}`);
+        return map;
+    }, {});
     
+    console.log("\nPersons by State:");
+    for (let state in stateMap) {
+        console.log(`${state}: ${stateMap[state].join(", ")}`);
+    }
+    }
+
 }
 
 
@@ -187,4 +239,12 @@ myAddressBook.deleteContact("Shubham", "Verma");
 
 //UC - 6 : Count contacts
 myAddressBook.countContacts();
+
+//UC - 8 : search by city or state
+myAddressBook.searchByCity("Bhopal");
+myAddressBook.searchByState("MPState");
+
+//UC - 9 : view person by city or state
+myAddressBook.viewPersonsByCity();
+myAddressBook.viewPersonsByState();
 
