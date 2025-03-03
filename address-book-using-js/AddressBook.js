@@ -137,7 +137,7 @@ class AddressBook {
         return this.contacts.length;
     }
     // Search contacts by city
-searchByCity(city) {
+    searchByCity(city) {
     let personsInCity = this.contacts.filter(contact => contact.city === city);
     if (personsInCity.length > 0) {
         console.log(`\nContacts in ${city}:`);
@@ -147,8 +147,8 @@ searchByCity(city) {
     }
 }
 
-// Search contacts by state
-searchByState(state) {
+    // Search contacts by state
+    searchByState(state) {
     let personsInState = this.contacts.filter(contact => contact.state === state);
     if (personsInState.length > 0) {
         console.log(`\nContacts in ${state}:`);
@@ -158,7 +158,7 @@ searchByState(state) {
     }
     }
     // View persons grouped by city
-viewPersonsByCity() {
+    viewPersonsByCity() {
     let cityMap = this.contacts.reduce((map, contact) => {
         if (!map[contact.city]) {
             map[contact.city] = [];
@@ -171,10 +171,10 @@ viewPersonsByCity() {
     for (let city in cityMap) {
         console.log(`${city}: ${cityMap[city].join(", ")}`);
     }
-}
+    }
 
-// View persons grouped by state
-viewPersonsByState() {
+    // View persons grouped by state
+    viewPersonsByState() {
     let stateMap = this.contacts.reduce((map, contact) => {
         if (!map[contact.state]) {
             map[contact.state] = [];
@@ -189,7 +189,7 @@ viewPersonsByState() {
     }
     }
     // Get count of contacts by city
-getCountByCity() {
+    getCountByCity() {
     let cityCount = this.contacts.reduce((countMap, contact) => {
         countMap[contact.city] = (countMap[contact.city] || 0) + 1;
         return countMap;
@@ -201,19 +201,56 @@ getCountByCity() {
     }
 }
 
-// Get count of contacts by state
-getCountByState() {
-    let stateCount = this.contacts.reduce((countMap, contact) => {
-        countMap[contact.state] = (countMap[contact.state] || 0) + 1;
-        return countMap;
-    }, {});
+    // Get count of contacts by state
+    getCountByState() {
+        let stateCount = this.contacts.reduce((countMap, contact) => {
+            countMap[contact.state] = (countMap[contact.state] || 0) + 1;
+            return countMap;
+        }, {});
 
-    console.log("\nCount of Persons by State:");
-    for (let state in stateCount) {
-        console.log(`${state}: ${stateCount[state]}`);
+        console.log("\nCount of Persons by State:");
+        for (let state in stateCount) {
+            console.log(`${state}: ${stateCount[state]}`);
+        }
     }
+    // Sort contacts alphabetically by first name
+    sortByName() {
+    this.contacts.sort((a, b) => a.firstName.localeCompare(b.firstName));
+    console.log("\n---- Address Book Sorted by Name ----");
+    this.contacts.forEach((contact, index) => {
+        console.log(`${index + 1}. ${contact.display()}`);
+    });
     }
 
+
+    // Sort by City
+    sortByCity() {
+        this.contacts.sort((a, b) => a.city.localeCompare(b.city));
+        console.log("\n---- Address Book Sorted by City ----");
+        this.contacts.forEach((contact, index) => {
+            console.log(`${index + 1}. ${contact.display()}`);
+        });
+    }
+    
+    // Sort by State
+    sortByState() {
+        this.contacts.sort((a, b) => a.state.localeCompare(b.state));
+        console.log("\n---- Address Book Sorted by State ----");
+        this.contacts.forEach((contact, index) => {
+            console.log(`${index + 1}. ${contact.display()}`);
+        });
+    }
+    
+    // Sort by Zip
+    sortByZip() {
+        this.contacts.sort((a, b) => a.zip - b.zip);
+        console.log("\n---- Address Book Sorted by Zip ----");
+        this.contacts.forEach((contact, index) => {
+            console.log(`${index + 1}. ${contact.display()}`);
+        });
+    }
+
+    
 }
 
 
@@ -276,3 +313,35 @@ myAddressBook.viewPersonsByState();
 //UC - 10 : count by city or state
 myAddressBook.getCountByCity();
 myAddressBook.getCountByState();
+
+try {
+    let contact1 = new Contact("Deepanshu", "Malviya", "456 Road", "Bhopal", "MPState", "462001", "9876543210", "deepanshu@example.com");
+    myAddressBook.addContact(contact1);
+
+    let contact2 = new Contact("Shubham", "Gupta", "789 Street", "Indore", "MPState", "452001", "9123456789", "shubham@example.com");
+    myAddressBook.addContact(contact2);
+
+    let contact3 = new Contact("Raj", "Sharma", "123 Road", "Harda", "MPState", "461331", "9988776655", "raj@example.com");
+    myAddressBook.addContact(contact3);
+
+    let contact4 = new Contact("Karan", "Verma", "321 Lane", "Bhopal", "MPState", "462044", "9112233445", "karan@example.com");
+    myAddressBook.addContact(contact4);
+
+    let contact5 = new Contact("Yogesh", "Patel", "654 Avenue", "Indore", "MPState", "452002", "9001122334", "yogesh@example.com");
+    myAddressBook.addContact(contact5);
+
+    let contact6 = new Contact("Shubh", "Joshi", "987 Path", "Dewas", "MPState", "455001", "8899776655", "shubh@example.com");
+    myAddressBook.addContact(contact6);
+
+} catch (error) {
+    console.error(error.message);
+}
+
+
+//UC - 11 : sort by name
+myAddressBook.sortByName();
+
+//UC - 12 : other sortings
+myAddressBook.sortByCity();
+myAddressBook.sortByState();
+myAddressBook.sortByZip();
