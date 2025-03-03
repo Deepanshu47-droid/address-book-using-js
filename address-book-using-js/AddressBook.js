@@ -244,7 +244,7 @@ myAddressBook.countContacts();
 myAddressBook.searchByCity("Bhopal");
 myAddressBook.searchByState("MPState");
 
-//UC - 9 : view person by city or state
+//UC - 9 : view person by city
 myAddressBook.viewPersonsByCity();
 myAddressBook.viewPersonsByState();
 
